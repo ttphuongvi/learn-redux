@@ -3,7 +3,9 @@ import './App.css';
 import { DECREASE, INCREASE } from './store/constants/actionTypes';
 
 function App() {
-  const counter = useSelector((state) => state.counter); // lấy biến counter từ store
+  const {counter} = useSelector((state) => state.counter); // lấy biến counter từ store 
+
+  console.log(counter); // in ra biến counter
 
   const dispatch = useDispatch(); // khởi tạo dispatch
 
@@ -14,7 +16,7 @@ function App() {
   const handleIncrease = () => {
     dispatch({ type: INCREASE }); 
   }; // gửi hành động tăng
-  
+
   return (
     <div className="App">
      <h2>Learn to Redux</h2>
