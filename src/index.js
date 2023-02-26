@@ -3,11 +3,24 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {  createStore } from 'redux';
+import counterReducer from './store/reducers/counterReducer';
+import { Provider } from 'react-redux';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const store = createStore(
+  counterReducer,
+  // combineReducers({
+  //   counterReducer, // gộp các reducer lại với nhau trường hợp sau này có thêm các reducer khác
+  // }),
+); // khởi tạo store với reducer là counterReducer
+
 root.render(
   <React.StrictMode>
+    <Provider store={store}>
     <App />
+    </Provider>
   </React.StrictMode>
 );
 
