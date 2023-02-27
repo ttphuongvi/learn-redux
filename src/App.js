@@ -1,20 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
-import { DECREASE, INCREASE } from './store/constants/actionTypes';
+import { decrease, increase } from './store/actions/counerAction';
 
 function App() {
   const {counter} = useSelector((state) => state.counter); // lấy biến counter từ store 
 
-  console.log(counter); // in ra biến counter
-
   const dispatch = useDispatch(); // khởi tạo dispatch
 
   const handleDecrease = () => {
-    dispatch({ type: DECREASE }); 
+    dispatch(decrease()); 
   }; // gửi hành động giảm
 
   const handleIncrease = () => {
-    dispatch({ type: INCREASE }); 
+    dispatch(increase()); 
   }; // gửi hành động tăng
 
   return (
