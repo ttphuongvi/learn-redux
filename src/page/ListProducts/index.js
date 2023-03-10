@@ -5,13 +5,33 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  CardActions,
   Button,
+  Box,
 } from "@mui/material";
 
 import { useDispatch, useSelector } from "react-redux";
 import Cart from "./Cart";
 import { addProductToCart } from "../../store/actions/updateProductCart";
+import { styled } from "@mui/material/styles";
+
+const CardStyles = styled(Card)(({ theme }) => ({
+  boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 0px 1px",
+  transition: "all .2s ease",
+  position: "relative",
+  overflow: "hidden",
+
+  [theme.breakpoints.up("md")]: {
+    "& .overlay": {
+      transition: "opacity .2s ease",
+      opacity: 0,
+    },
+    "&:hover": {
+      cursor: "pointer",
+      boxShadow: "rgba(0, 0, 0, 0.14) 0px 3px 8px",
+      transform: "translateY(-4px)",
+    },
+  },
+}));
 
 export default function ListProducts() {
   const listProduct = useSelector((state) => state.cart.products); // danh sách sản phẩm
@@ -28,30 +48,42 @@ export default function ListProducts() {
         {listProduct.map((item) => {
           return (
             <Grid item xs={12} sm={6} md={4} lg={3} key={item.name}>
-              <Card variant="outlined">
+              <CardStyles variant="outlined">
                 <CardMedia
                   component="img"
                   height="194"
                   image={item.image}
                   alt="Paella dish"
+                  sx={{ objectFit: "contain" }}
                 />
                 <CardContent>
-                  <Typography align="left" sx={{ fontWeight: "bold" }}>
-                    {item.name}
-                  </Typography>
-                  <Typography color="error" align="left">
-                    {item.price} $
-                  </Typography>
+                  <Grid container justifyContent={"space-between"}>
+                    <Grid item>
+                      <Typography align="left" sx={{ fontWeight: "bold" }}>
+                        {item.name}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography
+                        color="error"
+                        align="left"
+                        sx={{ fontWeight: "bold" }}
+                      >
+                        {item.price} $
+                      </Typography>
+                    </Grid>
+                  </Grid>
                 </CardContent>
-                <CardActions>
+                <Box display={"flex"} justifyContent="center" pb={2}>
                   <Button
                     variant="outlined"
+                    sx={{ borderRadius: "25px", textTransform: "none" }}
                     onClick={() => handleAddProductToCart(item)}
                   >
                     Thêm vào giỏ hàng
                   </Button>
-                </CardActions>
-              </Card>
+                </Box>
+              </CardStyles>
             </Grid>
           );
         })}

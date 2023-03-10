@@ -13,7 +13,9 @@ import {
   Menu,
   Typography,
 } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeProductToCart } from "../../store/actions/updateProductCart";
+import CloseIcon from "@mui/icons-material/Close";
 
 function Cart(props) {
   const amountProduct = useSelector(
@@ -30,6 +32,12 @@ function Cart(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const dispatch = useDispatch(); // khởi tạo dispatch
+
+  const handleRemoveProductToCart = (item) => {
+    dispatch(removeProductToCart(item));
+  }; // hàm xóa sản phẩm khỏi giỏ hàng
 
   const listProductCart = useSelector((state) => state.cart.productsToCart); // danh sách sản phẩm trong giỏ hàng
 
@@ -78,8 +86,14 @@ function Cart(props) {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <List
-          sx={{ width: "100%", minWidth: 360, bgcolor: "background.paper" }}
+          sx={{ width: "100%", minWidth: 400, bgcolor: "background.paper" }}
         >
+          {listProductCart.length === 0 && (
+            <Typography align="center">
+              Chưa có sản phẩm nào trong giỏ hàng
+            </Typography>
+          )}
+
           {listProductCart.map((item, index) => {
             const labelId = `checkbox-list-label-${item.name}`;
 
@@ -87,7 +101,13 @@ function Cart(props) {
               <ListItem
                 key={item.id}
                 secondaryAction={
-                  <Typography color="error">{item.price} $</Typography>
+                  <IconButton
+                    color="error"
+                    onClick={() => handleRemoveProductToCart(item)}
+                    sx={{ borderRadius: "25px", textTransform: "none" }}
+                  >
+                    <CloseIcon />
+                  </IconButton>
                 }
                 divider={index !== listProductCart.length - 1}
                 disablePadding
@@ -96,7 +116,15 @@ function Cart(props) {
                   <ListItemAvatar>
                     <Avatar alt="Remy Sharp" src={item.image} />
                   </ListItemAvatar>
-                  <ListItemText id={labelId} primary={item.name} />
+                  <ListItemText
+                    id={labelId}
+                    primary={
+                      <>
+                        <Typography>{item.name} $</Typography>
+                        <Typography color="error">{item.price} $</Typography>
+                      </>
+                    }
+                  />
                 </ListItemButton>
               </ListItem>
             );
