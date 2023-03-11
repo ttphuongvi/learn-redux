@@ -1,11 +1,11 @@
 import "./App.css";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import { Box } from "@mui/material";
+import { AppBar, Box, Button, Grid, Toolbar } from "@mui/material";
 import React from "react";
 import PropTypes from "prop-types";
-import Home from "./page/Home";
-import ListProducts from "./page/ListProducts";
+import { NavLink, useRoutes } from "react-router-dom";
+import { dataRoutes } from "./routesApp/dataRoutes";
+import { menuRoutes } from "./routesApp/menuRoutes";
+import Cart from "./page/ListProducts/Cart";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -29,57 +29,29 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
 function App() {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  const tabs = [
-    {
-      label: "Trang chủ",
-      content: <Home />,
-    },
-    {
-      label: "Sản phẩm",
-      content: <ListProducts />,
-    },
-  ];
+  const content = useRoutes(dataRoutes);
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-        >
-          {tabs.map((tab, index) => {
-            return (
-              <Tab
-                label={tab.label}
-                {...a11yProps({ index })}
-                key={tab.label}
-              />
-            );
-          })}
-        </Tabs>
-      </Box>
-      {tabs.map((tab, index) => {
-        return (
-          <TabPanel value={value} index={index} key={tab.label}>
-            {tab.content}
-          </TabPanel>
-        );
-      })}
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <Grid container alignItems={"center"}>
+            {menuRoutes.map((item) => (
+              <Grid item>
+                <Button variant="h6" component={NavLink} to={item.path}>
+                  {item.name}
+                </Button>
+              </Grid>
+            ))}
+
+            <Grid item xs>
+              <Cart />
+            </Grid>
+          </Grid>
+        </Toolbar>
+      </AppBar>
+      <Box p={2}> {content}</Box>
     </Box>
   );
 }

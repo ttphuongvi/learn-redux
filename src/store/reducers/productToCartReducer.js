@@ -13,7 +13,6 @@ const productToCartReducer = (state = initState, action) => {
   switch (action.type) {
     case ADD_PRODUCT_TO_CART:
       return {
-        ...state,
         productsToCart: [...state.productsToCart, action.itemProduct], // thêm sản phẩm vào giỏ hàng
         products: state.products.filter(
           (item) => item.id !== action.itemProduct.id
@@ -21,7 +20,6 @@ const productToCartReducer = (state = initState, action) => {
       };
     case REMOVE_PRODUCT_TO_CART:
       return {
-        ...state,
         productsToCart: state.productsToCart.filter(
           (item) => item.id !== action.itemProduct.id
         ), // xóa sản phẩm khỏi giỏ hàng
