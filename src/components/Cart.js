@@ -13,23 +13,18 @@ import {
   Menu,
   Typography,
 } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { removeProductToCart } from "../../store/actions/updateProductCart";
 import CloseIcon from "@mui/icons-material/Close";
+import PropTypes from "prop-types";
 
-function Cart() {
-  const amountProduct = useSelector(
-    (state) => state.cart.productsToCart.length
-  ); // số lượng sản phẩm trong giỏ hàng
+/**
+ * Component hiển thị giỏ hàng
+ * @param {Number} amountProduct số lượng sản phẩm trong giỏ hàng
+ * @param {Array} listProductCart danh sách sản phẩm trong giỏ hàng
+ * @param {Function} onRemoveProductToCart hàm xóa sản phẩm khỏi giỏ hàng
+ * @returns
+ */
 
-  const listProductCart = useSelector((state) => state.cart.productsToCart); // danh sách sản phẩm trong giỏ hàng
-
-  const dispatch = useDispatch(); // khởi tạo dispatch
-
-  const handleRemoveProductToCart = (item) => {
-    dispatch(removeProductToCart(item));
-  }; // hàm xóa sản phẩm khỏi giỏ hàng
-
+function Cart({ onRemoveProductToCart, amountProduct, listProductCart }) {
   // hàm hiển thị menu giỏ hàng
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -104,7 +99,7 @@ function Cart() {
                 secondaryAction={
                   <IconButton
                     color="error"
-                    onClick={() => handleRemoveProductToCart(item)}
+                    onClick={() => onRemoveProductToCart(item)}
                     sx={{ borderRadius: "25px", textTransform: "none" }}
                   >
                     <CloseIcon />
@@ -137,3 +132,9 @@ function Cart() {
 }
 
 export default Cart;
+
+Cart.propTypes = {
+  amountProduct: PropTypes.number, // số lượng sản phẩm trong giỏ hàng
+  onRemoveProductToCart: PropTypes.func, // hàm xóa sản phẩm khỏi giỏ hàng
+  listProductCart: PropTypes.array, // danh sách sản phẩm trong giỏ hàng
+};

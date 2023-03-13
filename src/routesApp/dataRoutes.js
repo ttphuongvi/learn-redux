@@ -1,10 +1,10 @@
-import Home from "../page/Home";
+import HomePage from "../page/HomePage";
 import ListProducts from "../page/ListProducts";
 
 const dataRoutes = [
   {
     path: "/*",
-    element: <Home />,
+    element: <HomePage />,
   },
   {
     path: "products",

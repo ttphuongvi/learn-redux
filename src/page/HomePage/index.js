@@ -1,8 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Counter from "../../components/Counter";
 import { increase, decrease } from "../../store/actions/counterAction";
 
-export default function Home() {
+export default function HomePage() {
   const { counter } = useSelector((state) => state.counter); // lấy biến counter từ store
 
   const dispatch = useDispatch(); // khởi tạo dispatch
@@ -15,12 +16,10 @@ export default function Home() {
     dispatch(increase());
   }; // gửi hành động tăng
   return (
-    <>
-      <h2>Learn to Redux</h2>
-      <div>
-        <button onClick={handleDecrease}>-</button> {counter}{" "}
-        <button onClick={handleIncrease}>+</button>
-      </div>
-    </>
+    <Counter
+      counter={counter}
+      handleDecrease={handleDecrease}
+      handleIncrease={handleIncrease}
+    />
   );
 }
