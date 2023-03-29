@@ -35,44 +35,46 @@ export default function ListProducts({ listProduct, handleAddProductToCart }) {
     <Grid container spacing={2} sx={{ padding: 2 }}>
       {listProduct.map((item) => {
         return (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={item.name}>
-            <CardStyles variant="outlined">
-              <CardMedia
-                component="img"
-                height="194"
-                image={item.image}
-                alt="Paella dish"
-                sx={{ objectFit: "contain" }}
-              />
-              <CardContent>
-                <Grid container justifyContent={"space-between"}>
-                  <Grid item>
-                    <Typography align="left" sx={{ fontWeight: "bold" }}>
-                      {item.name}
-                    </Typography>
+          !item.isAddedCart && (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={item.name}>
+              <CardStyles variant="outlined">
+                <CardMedia
+                  component="img"
+                  height="194"
+                  image={item.image}
+                  alt="Paella dish"
+                  sx={{ objectFit: "contain" }}
+                />
+                <CardContent>
+                  <Grid container justifyContent={"space-between"}>
+                    <Grid item>
+                      <Typography align="left" sx={{ fontWeight: "bold" }}>
+                        {item.name}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography
+                        color="error"
+                        align="left"
+                        sx={{ fontWeight: "bold" }}
+                      >
+                        {item.price} $
+                      </Typography>
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    <Typography
-                      color="error"
-                      align="left"
-                      sx={{ fontWeight: "bold" }}
-                    >
-                      {item.price} $
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </CardContent>
-              <Box display={"flex"} justifyContent="center" pb={2}>
-                <Button
-                  variant="outlined"
-                  sx={{ borderRadius: "25px", textTransform: "none" }}
-                  onClick={() => handleAddProductToCart(item)}
-                >
-                  Thêm vào giỏ hàng
-                </Button>
-              </Box>
-            </CardStyles>
-          </Grid>
+                </CardContent>
+                <Box display={"flex"} justifyContent="center" pb={2}>
+                  <Button
+                    variant="outlined"
+                    sx={{ borderRadius: "25px", textTransform: "none" }}
+                    onClick={() => handleAddProductToCart(item)}
+                  >
+                    Thêm vào giỏ hàng
+                  </Button>
+                </Box>
+              </CardStyles>
+            </Grid>
+          )
         );
       })}
     </Grid>

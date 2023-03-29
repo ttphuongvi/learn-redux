@@ -7,6 +7,7 @@ const listProduct = [
     hero: "OMG This just came out today!",
     image:
       "https://guesseu.scene7.com/is/image/GuessEU/M63H24W7JF0-L302-ALTGHOST?wid=1500&fmt=jpeg&qlt=80&op_sharpen=0&op_usm=1.0,1.0,5,0&iccEmbed=0",
+    isAddedCart: false,
   },
   {
     id: 1,
@@ -16,6 +17,7 @@ const listProduct = [
     info: "This is the latest and greatest product from Derp corp.",
     image:
       "https://guesseu.scene7.com/is/image/GuessEU/HWVG6216060-TAN?wid=700&amp;fmt=jpeg&amp;qlt=80&amp;op_sharpen=0&amp;op_usm=1.0,1.0,5,0&amp;iccEmbed=0",
+    isAddedCart: false,
   },
   {
     id: 2,
@@ -25,6 +27,7 @@ const listProduct = [
     offer: "BOGOF",
     image:
       "http://guesseu.scene7.com/is/image/GuessEU/WC0001FMSWC-G5?wid=520&fmt=jpeg&qlt=80&op_sharpen=0&op_usm=1.0,1.0,5,0&iccEmbed=0",
+    isAddedCart: false,
   },
   {
     id: 3,
@@ -33,6 +36,7 @@ const listProduct = [
     price: "199",
     image:
       "https://guesseu.scene7.com/is/image/GuessEU/AW6308VIS03-SAP?wid=700&amp;fmt=jpeg&amp;qlt=80&amp;op_sharpen=0&amp;op_usm=1.0,1.0,5,0&amp;iccEmbed=0",
+    isAddedCart: false,
   },
   {
     id: 4,
@@ -42,6 +46,7 @@ const listProduct = [
     offer: "No srsly GTFO",
     image:
       "https://user-images.githubusercontent.com/41929050/61567054-13938600-aa33-11e9-9163-eec98e239b7a.png",
+    isAddedCart: false,
   },
   {
     id: 5,
@@ -50,6 +55,7 @@ const listProduct = [
     price: "59",
     image:
       "https://user-images.githubusercontent.com/41929050/61567055-142c1c80-aa33-11e9-96ff-9fbac6413625.png",
+    isAddedCart: false,
   },
   {
     id: 6,
@@ -60,6 +66,7 @@ const listProduct = [
     offer: "info with offer",
     image:
       "https://user-images.githubusercontent.com/41929050/61567056-142c1c80-aa33-11e9-8682-10065d338145.png",
+    isAddedCart: false,
   },
 ];
 
