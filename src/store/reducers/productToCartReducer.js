@@ -12,20 +12,24 @@ const initState = {
 const productToCartReducer = (state = initState, action) => {
   switch (action.type) {
     case ADD_PRODUCT_TO_CART:
+      state.productsToCart.push(action.itemProduct);
+
+      const indexItem = state.products.findIndex(
+        (item) => item.id === action.itemProduct.id
+      ); // tìm vị trí sản phẩm trong danh sách sản phẩm
+      console.log("indexItem", indexItem);
+      console.log("acart", state.productsToCart);
+      console.log("list", state.products);
       return {
-        productsToCart: [...state.productsToCart, action.itemProduct], // thêm sản phẩm vào giỏ hàng
-        // products: state.products.filter(
-        //   (item) => item.id !== action.itemProduct.id
-        // ), // xóa sản phẩm khỏi danh sách sản phẩm
-        products: state.products.map((item) => {
-          if (item.id === action.itemProduct.id) {
-            return {
-              ...item,
-              isAddedCart: true,
-            };
-          }
-          return item;
-        }), // xóa sản phẩm khỏi danh sách sản phẩm
+        productsToCart: state.productsToCart, // thêm sản phẩm vào giỏ hàng
+        products: [
+          ...state.products.slice(0, indexItem),
+          {
+            ...state.products[indexItem],
+            isAddedCart: true, // đánh dấu sản phẩm đã được thêm vào giỏ hàng
+          },
+          ...state.products.slice(indexItem + 1),
+        ],
       };
     case REMOVE_PRODUCT_TO_CART:
       return {

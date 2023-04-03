@@ -7,6 +7,7 @@ import { removeProductToCart } from "../store/actions/updateProductCart";
 
 function RootPage({ content }) {
   const listProductCart = useSelector((state) => state.cart.productsToCart); // danh sách sản phẩm trong giỏ hàng
+  console.log("listProductCart", listProductCart);
 
   const dispatch = useDispatch(); // khởi tạo dispatch
 
