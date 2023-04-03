@@ -7,6 +7,7 @@ import {
 const initState = {
   productsToCart: [], // khởi tạo danh sách sản phẩm trong giỏ hàng
   products: listProduct, // khởi tạo danh sách sản phẩm ngoài list
+  amountProduct: 0, // khởi tạo số lượng sản phẩm trong giỏ hàng
 };
 
 const productToCartReducer = (state = initState, action) => {
@@ -30,6 +31,7 @@ const productToCartReducer = (state = initState, action) => {
           },
           ...state.products.slice(indexItem + 1),
         ],
+        amountProduct: state.amountProduct + 1, // tăng số lượng sản phẩm trong giỏ hàng
       };
     case REMOVE_PRODUCT_TO_CART:
       return {
@@ -45,6 +47,8 @@ const productToCartReducer = (state = initState, action) => {
           }
           return item;
         }), // xóa sản phẩm khỏi danh sách sản phẩm
+
+        amountProduct: state.amountProduct - 1, // giảm số lượng sản phẩm trong giỏ hàng
       };
     default:
       return state;

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AppBar, Button, Grid, Toolbar } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Cart from "./Cart";
 import { menuRoutes } from "../routesApp/menuRoutes";
+import PropTypes from "prop-types";
 
-function MenuAppBar({ onRemoveProductToCart, listProductCart }) {
+function MenuAppBar({ onRemoveProductToCart, listProductCart, amountProduct }) {
   return (
     <AppBar position="static">
       <Toolbar>
@@ -20,7 +21,7 @@ function MenuAppBar({ onRemoveProductToCart, listProductCart }) {
             <Cart
               onRemoveProductToCart={onRemoveProductToCart}
               listProductCart={listProductCart}
-              amountProduct={listProductCart.length}
+              amountProduct={amountProduct}
             />
           </Grid>
         </Grid>
@@ -28,5 +29,11 @@ function MenuAppBar({ onRemoveProductToCart, listProductCart }) {
     </AppBar>
   );
 }
+
+MenuAppBar.propTypes = {
+  onRemoveProductToCart: PropTypes.func,
+  listProductCart: PropTypes.array,
+  amountProduct: PropTypes.number,
+};
 
 export default MenuAppBar;
