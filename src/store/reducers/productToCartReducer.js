@@ -19,17 +19,17 @@ const productToCartReducer = (state = initState, action) => {
         (item) => item.id === action.itemProduct.id
       ); // tìm vị trí sản phẩm trong danh sách sản phẩm
       console.log("indexItem", indexItem);
-      console.log("acart", state.productsToCart);
+      console.log("cart", state.productsToCart);
       console.log("list", state.products);
       return {
         productsToCart: state.productsToCart, // thêm sản phẩm vào giỏ hàng
         products: [
-          ...state.products.slice(0, indexItem),
+          ...state.products.slice(0, indexItem), // clone các sản phẩm trước vị trí sản phẩm được thêm vào giỏ hàng
           {
-            ...state.products[indexItem],
-            isAddedCart: true, // đánh dấu sản phẩm đã được thêm vào giỏ hàng
+            ...state.products[indexItem], // clone sản phẩm được thêm vào giỏ hàng
+            isAddedCart: true, // đánh dấu đã được thêm vào giỏ hàng
           },
-          ...state.products.slice(indexItem + 1),
+          ...state.products.slice(indexItem + 1), // clone các sản phẩm sau vị trí sản phẩm được thêm vào giỏ hàng
         ],
         amountProduct: state.amountProduct + 1, // tăng số lượng sản phẩm trong giỏ hàng
       };
@@ -47,7 +47,6 @@ const productToCartReducer = (state = initState, action) => {
           }
           return item;
         }), // xóa sản phẩm khỏi danh sách sản phẩm
-
         amountProduct: state.amountProduct - 1, // giảm số lượng sản phẩm trong giỏ hàng
       };
     default:
